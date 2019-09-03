@@ -27,14 +27,15 @@ class App extends Component {
         });
   }
 // All the Properties passed to components are received in props 
-// setState is aSync call 
+// setState is aSync call , onChange is JSX
   render() {
+    
     return (
       <div className="App">
         <input type='search' placeholder='search monsters ' onChange={e => {
           this.state.searchFiled = e.target.value;
           
-          this.setState({monsters : this.allMonsters.filter(mon => mon.name.includes(this.state.searchFiled)),
+          this.setState({monsters : this.allMonsters.filter(mon => mon.name.toLowerCase().includes(this.state.searchFiled.toLowerCase())),
             searchFiled : this.state.searchFiled
           })
           console.log(this.state.searchFiled);
