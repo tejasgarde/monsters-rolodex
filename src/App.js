@@ -6,36 +6,39 @@ import './App.css';
 
 class App extends Component {
 
+  
+
   constructor(){
     super();
-
+    let allMonsters = [];
     this.state ={
-      monsters : [
-        {
-          name : 'Frankenstein',
-          id: 'asc1'
-        },
-        {
-          name : 'Dracula',
-          id: 'asc2'
-        },
-        {
-          name : 'Zombi',
-          id: 'asc3'
-        }
-      ]
+      monsters : [],
+      searchFiled : ''
     }
   }
 
   componentDidMount(){
     fetch('https://jsonplaceholder.typicode.com/users')
     .then(response => response.json())
-    .then(users => this.setState({monsters : users}));
+    .then(users => {
+        this.setState({monsters : users});
+        this.allMonsters = users;
+        
+        });
   }
 // All the Properties passed to components are received in props 
+// setState is aSync call 
   render() {
     return (
       <div className="App">
+        <input type='search' placeholder='search monsters ' onChange={e => {
+          this.state.searchFiled = e.target.value;
+          
+          this.setState({monsters : this.allMonsters.filter(mon => mon.name.includes(this.state.searchFiled)),
+            searchFiled : this.state.searchFiled
+          })
+          console.log(this.state.searchFiled);
+        }} />
         <CardList monsters={this.state.monsters}/>
       
     </div>

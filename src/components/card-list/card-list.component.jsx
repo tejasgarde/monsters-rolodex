@@ -12,7 +12,7 @@ return (
     <div className='card-list'>
          {
             props.monsters.map(mon => 
-                <Card key={mon.id} className="card-container" monster={mon} />
+                <Card key={mon.id}  monster={mon} />
         )}
     </div>
 );
