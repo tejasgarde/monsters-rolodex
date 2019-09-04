@@ -18,7 +18,7 @@ class App extends Component {
     }
 
     // binds this to contex of handleChange function
-    this.handleChange = this.handleChange.bind(this);
+    //this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount(){
@@ -29,9 +29,14 @@ class App extends Component {
 
   // Here this is not defined as the JS does not define contex on function
   // TO do so we use the bind in constuctor
-  handleChange(e){
+  // handleChange(e){
+  //   this.setState({searchFiled : e.target.value});
+  // }
+
+  // This binding can be completly avoided using arrow => functionality of ES6
+  handleChange = (e) => {
     this.setState({searchFiled : e.target.value});
-  }
+  };
 
  
 // All the Properties passed to components are received in props 
