@@ -16,12 +16,21 @@ class App extends Component {
       monsters : [],
       searchFiled : ''
     }
+
+    // binds this to contex of handleChange function
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount(){
     fetch('https://jsonplaceholder.typicode.com/users')
     .then(response => response.json())
     .then(users => this.setState({monsters : users}) );
+  }
+
+  // Here this is not defined as the JS does not define contex on function
+  // TO do so we use the bind in constuctor
+  handleChange(e){
+    this.setState({searchFiled : e.target.value});
   }
 
  
@@ -41,7 +50,7 @@ class App extends Component {
       <div className="App">
         <SearchBox 
         placeholder='search monsters'
-        handleChange={e => this.setState({searchFiled : e.target.value})}
+        handleChange={this.handleChange}
          />
         <CardList monsters={filterMonsters}/>
       
